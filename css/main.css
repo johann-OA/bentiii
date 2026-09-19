@@ -7,7 +7,7 @@
 }
 
 :root {
-  --dark-color: #000;
+  --dark-color: #010004;
 }
 
 body {
@@ -15,25 +15,1009 @@ body {
   align-items: flex-end;
   justify-content: center;
   min-height: 100vh;
-  background-color: var(--dark-color);
+  background-color: #000000;
   overflow: hidden;
   perspective: 1000px;
+  position: relative;
+  margin: 0;
+  padding: 0;
 }
 
+/* Deep Space & Nebula Background - Deep Pitch Black Cosmos */
 .night {
   position: fixed;
-  left: 50%;
+  left: 0;
   top: 0;
-  transform: translateX(-50%);
   width: 100%;
   height: 100%;
-  filter: blur(0.1vmin);
-  background-image: radial-gradient(ellipse at top, transparent 0%, var(--dark-color)), radial-gradient(ellipse at bottom, var(--dark-color), rgba(145, 233, 255, 0.2)), repeating-linear-gradient(220deg, rgb(0, 0, 0) 0px, rgb(0, 0, 0) 19px, transparent 19px, transparent 22px), repeating-linear-gradient(189deg, rgb(0, 0, 0) 0px, rgb(0, 0, 0) 19px, transparent 19px, transparent 22px), repeating-linear-gradient(148deg, rgb(0, 0, 0) 0px, rgb(0, 0, 0) 19px, transparent 19px, transparent 22px), linear-gradient(90deg, rgb(0, 255, 250), rgb(240, 240, 240));
+  background: 
+    radial-gradient(ellipse 70% 35% at 50% 0%, rgba(12, 6, 24, 0.22) 0%, transparent 80%),
+    radial-gradient(ellipse 45% 30% at 20% 25%, rgba(22, 8, 42, 0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 30% at 80% 30%, rgba(32, 8, 25, 0.10) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 20% at 50% 88%, rgba(16, 6, 28, 0.25) 0%, transparent 75%),
+    linear-gradient(180deg, #000000 0%, #010104 35%, #030208 75%, #010003 100%);
+  z-index: 1;
+  pointer-events: none;
 }
 
-.flowers {
+/* Space Starfield Canvas */
+#space-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   TOP-RIGHT BIRTHDAY NEGATIVE COUNTDOWN COUNTER (Her Birthday: 30/01)
+   ========================================================================== */
+.birthday-counter {
+  position: fixed;
+  top: calc(env(safe-area-inset-top, 0px) + 16px);
+  right: calc(env(safe-area-inset-right, 0px) + 18px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(14, 8, 28, 0.72);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(244, 166, 191, 0.32);
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.65),
+    0 0 22px rgba(230, 80, 130, 0.22),
+    inset 0 1px 1px rgba(255, 255, 255, 0.25);
+  border-radius: 16px;
+  padding: 8px 16px;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  user-select: none;
+  pointer-events: auto;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.birthday-counter:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 14px 35px rgba(0, 0, 0, 0.75),
+    0 0 28px rgba(244, 166, 191, 0.35),
+    inset 0 1px 2px rgba(255, 255, 255, 0.35);
+}
+
+.counter-timer {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.counter-title {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: rgba(255, 200, 220, 0.9);
+  text-shadow: 0 0 8px rgba(244, 166, 191, 0.4);
+}
+
+.counter-sign {
+  font-size: 1.45rem;
+  font-weight: 900;
+  color: #ff6584;
+  margin-right: 2px;
+  line-height: 1;
+  text-shadow: 0 0 14px rgba(255, 101, 132, 0.9);
+  animation: pulse-negative 2s infinite ease-in-out;
+}
+
+@keyframes pulse-negative {
+  0%, 100% { opacity: 0.75; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.18); }
+}
+
+.time-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 32px;
+}
+
+.time-digit {
+  font-family: ui-monospace, SFMono-Regular, "SF Pro Display", Menlo, Monaco, Consolas, monospace;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.1;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.6), 0 0 20px rgba(244, 166, 191, 0.4);
+  font-variant-numeric: tabular-nums;
+}
+
+.time-label {
+  font-size: 0.52rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: rgba(255, 180, 200, 0.75);
+  margin-top: 1px;
+}
+
+.time-colon {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: rgba(255, 160, 190, 0.6);
+  margin-top: -6px;
+  animation: blink-colon 1s infinite steps(1, start);
+}
+
+@keyframes blink-colon {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+/* Upper Section: Reserved space for interactive elements */
+.upper-section {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 52vh;
+  z-index: 50;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: calc(env(safe-area-inset-top, 0px) + 24px);
+}
+
+/* ==========================================================================
+   HER COSMIC DAILY THOUGHTS JOURNAL
+   ========================================================================== */
+
+/* Floating Celestial Trigger Button */
+.journal-trigger-btn {
   position: relative;
-  transform: scale(0.9);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(18, 10, 34, 0.72);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(244, 166, 191, 0.38);
+  border-radius: 999px;
+  padding: 10px 20px;
+  color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  pointer-events: auto;
+  user-select: none;
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.65),
+    0 0 20px rgba(230, 80, 130, 0.22),
+    inset 0 1px 1px rgba(255, 255, 255, 0.25);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: celestial-float 4s ease-in-out infinite alternate;
+}
+
+@keyframes celestial-float {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-4px); }
+}
+
+.journal-trigger-btn:hover {
+  transform: translateY(-5px) scale(1.03);
+  background: rgba(28, 14, 48, 0.85);
+  border-color: rgba(244, 166, 191, 0.65);
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.75),
+    0 0 28px rgba(244, 166, 191, 0.4),
+    inset 0 1px 2px rgba(255, 255, 255, 0.4);
+}
+
+.journal-btn-icon {
+  font-size: 1rem;
+  filter: drop-shadow(0 0 6px rgba(255, 200, 220, 0.8));
+}
+
+.journal-btn-badge {
+  font-size: 0.65rem;
+  color: #ff6584;
+  text-shadow: 0 0 8px #ff6584;
+  animation: pulse-badge 1.8s infinite ease-in-out;
+}
+
+@keyframes pulse-badge {
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.3); }
+}
+
+/* Glassmorphic Journal Backdrop */
+.journal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: rgba(2, 1, 6, 0.68);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.journal-backdrop.open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* Journal Card Dialog */
+.journal-card {
+  position: relative;
+  width: 92vw;
+  max-width: 520px;
+  max-height: 86vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(145deg, rgba(22, 12, 42, 0.92) 0%, rgba(12, 6, 24, 0.96) 100%);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid rgba(244, 166, 191, 0.35);
+  border-radius: 24px;
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.85),
+    0 0 35px rgba(230, 80, 130, 0.22),
+    inset 0 1px 2px rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+  transform: scale(0.92) translateY(14px);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.journal-backdrop.open .journal-card {
+  transform: scale(1) translateY(0);
+}
+
+/* Journal Header */
+.journal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 22px 24px 14px 24px;
+}
+
+.journal-header-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.journal-header-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.journal-tag {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  color: #ff8fa3;
+}
+
+.cloud-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  padding: 2px 8px;
+  font-size: 0.62rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.3px;
+  transition: all 0.3s ease;
+}
+
+.cloud-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #facc15; /* Yellow by default */
+  box-shadow: 0 0 6px #facc15;
+  transition: all 0.3s ease;
+}
+
+.cloud-status-badge.connected .cloud-status-dot {
+  background-color: #4ade80; /* Green */
+  box-shadow: 0 0 8px #4ade80;
+}
+
+.cloud-status-badge.connected {
+  border-color: rgba(74, 222, 128, 0.3);
+  color: #bbf7d0;
+}
+
+.cloud-status-badge.offline .cloud-status-dot {
+  background-color: #f87171; /* Red */
+  box-shadow: 0 0 8px #f87171;
+}
+
+.cloud-status-badge.local .cloud-status-dot {
+  background-color: #38bdf8; /* Blue */
+  box-shadow: 0 0 8px #38bdf8;
+}
+
+.journal-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.2;
+  text-shadow: 0 0 14px rgba(244, 166, 191, 0.35);
+}
+
+.journal-date {
+  font-size: 0.78rem;
+  color: rgba(255, 220, 235, 0.7);
+  margin-top: 2px;
+}
+
+.journal-close-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.journal-close-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+  transform: scale(1.08);
+}
+
+/* Tab Navigation */
+.journal-tabs {
+  display: flex;
+  gap: 8px;
+  padding: 0 24px 14px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.journal-tab {
+  flex: 1;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 7px 12px;
+  color: rgba(255, 255, 255, 0.65);
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.22s ease;
+}
+
+.journal-tab.active {
+  background: rgba(244, 166, 191, 0.18);
+  border-color: rgba(244, 166, 191, 0.55);
+  color: #ffffff;
+  box-shadow: 0 0 16px rgba(244, 166, 191, 0.22);
+}
+
+.journal-tab:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Tab Panes */
+.journal-tab-pane {
+  display: none;
+  padding: 16px 24px 22px 24px;
+  overflow-y: auto;
+  max-height: calc(86vh - 150px);
+}
+
+.journal-tab-pane.active {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Mood Picker */
+.journal-mood-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.journal-label {
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  color: rgba(255, 210, 225, 0.85);
+}
+
+.mood-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.mood-pill {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  padding: 5px 12px;
+  color: rgba(255, 255, 255, 0.8);
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mood-pill:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-1px);
+}
+
+.mood-pill.active {
+  background: rgba(230, 80, 130, 0.32);
+  border-color: rgba(244, 166, 191, 0.7);
+  color: #ffffff;
+  box-shadow: 0 0 14px rgba(244, 166, 191, 0.35);
+  transform: scale(1.04);
+}
+
+/* Text Input Section */
+.journal-input-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.thought-textarea {
+  width: 100%;
+  background: rgba(8, 4, 18, 0.65);
+  border: 1px solid rgba(244, 166, 191, 0.25);
+  border-radius: 14px;
+  padding: 12px 14px;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  resize: none;
+  outline: none;
+  transition: all 0.25s ease;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.thought-textarea:focus {
+  border-color: rgba(244, 166, 191, 0.65);
+  box-shadow:
+    inset 0 2px 6px rgba(0, 0, 0, 0.4),
+    0 0 16px rgba(244, 166, 191, 0.3);
+}
+
+.thought-textarea::placeholder {
+  color: rgba(255, 200, 220, 0.4);
+  font-style: italic;
+}
+
+.journal-char-count {
+  align-self: flex-end;
+  font-size: 0.68rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* Action Button */
+.journal-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 4px;
+}
+
+.journal-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 14px;
+  padding: 10px 22px;
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.journal-btn-primary {
+  background: linear-gradient(135deg, #e65082 0%, #9f38e6 100%);
+  color: #ffffff;
+  box-shadow:
+    0 6px 20px rgba(230, 80, 130, 0.45),
+    inset 0 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+.journal-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 10px 26px rgba(230, 80, 130, 0.6),
+    inset 0 1px 2px rgba(255, 255, 255, 0.4);
+}
+
+.journal-btn-primary:active {
+  transform: translateY(0);
+}
+
+.journal-btn-small {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  padding: 4px 10px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.journal-btn-small:hover {
+  background: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+}
+
+/* Past Thoughts Archive */
+.archive-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.archive-subtitle {
+  font-size: 0.74rem;
+  color: rgba(255, 220, 235, 0.65);
+}
+
+.thought-archive-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 48vh;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+/* Custom Scrollbar for Archive */
+.thought-archive-list::-webkit-scrollbar,
+.journal-tab-pane::-webkit-scrollbar {
+  width: 5px;
+}
+.thought-archive-list::-webkit-scrollbar-track,
+.journal-tab-pane::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 999px;
+}
+.thought-archive-list::-webkit-scrollbar-thumb,
+.journal-tab-pane::-webkit-scrollbar-thumb {
+  background: rgba(244, 166, 191, 0.35);
+  border-radius: 999px;
+}
+
+/* Individual Thought Card */
+.thought-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.thought-card:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(244, 166, 191, 0.3);
+  transform: translateY(-1px);
+}
+
+.thought-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.thought-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.thought-card-mood {
+  font-size: 0.72rem;
+  background: rgba(244, 166, 191, 0.18);
+  border-radius: 999px;
+  padding: 2px 8px;
+  color: #ffb8ca;
+}
+
+.thought-card-date {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.thought-card-delete {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  font-size: 0.8rem;
+  padding: 2px 6px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.thought-card-delete:hover {
+  color: #ff6584;
+  background: rgba(255, 101, 132, 0.15);
+}
+
+.thought-card-body {
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.92);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.thought-empty-state {
+  text-align: center;
+  padding: 28px 16px;
+  color: rgba(255, 220, 235, 0.55);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+/* Toast Notification */
+.journal-toast {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%) translateY(30px);
+  background: rgba(20, 10, 36, 0.95);
+  border: 1px solid rgba(244, 166, 191, 0.5);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 16px rgba(244, 166, 191, 0.3);
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #ffffff;
+  pointer-events: none;
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 50;
+  white-space: nowrap;
+}
+
+.journal-toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 600px) {
+  .upper-section {
+    padding-top: calc(env(safe-area-inset-top, 0px) + 72px);
+  }
+
+  .journal-trigger-btn {
+    padding: 8px 16px;
+    font-size: 0.82rem;
+  }
+
+  .journal-card {
+    width: 95vw;
+    border-radius: 20px;
+    max-height: 88vh;
+  }
+
+  .journal-header {
+    padding: 18px 18px 12px 18px;
+  }
+
+  .journal-title {
+    font-size: 1.2rem;
+  }
+
+  .journal-tabs {
+    padding: 0 18px 12px 18px;
+  }
+
+  .journal-tab-pane {
+    padding: 14px 18px 18px 18px;
+  }
+}
+
+/* Panoramic Bottom Garden Container */
+.garden {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 0;
+  z-index: 10;
+  pointer-events: none;
+  overflow: visible;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Subtle ground mist & night meadow aura */
+.garden__ground-glow {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 12vmin;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.98) 0%,
+    rgba(3, 1, 6, 0.6) 40%,
+    rgba(8, 3, 14, 0.15) 75%,
+    transparent 100%
+  );
+  z-index: 12;
+  pointer-events: none;
+}
+
+/* Base Flowers Cluster - Scaled down for garden harmony */
+.flowers {
+  position: absolute;
+  bottom: 0;
+  transform-origin: bottom center;
+}
+
+/* Panoramic Garden Clusters - Desktop / Large Displays */
+.flowers--center {
+  left: 50%;
+  transform: translateX(-50%) scale(0.46);
+  z-index: 11;
+}
+
+.flowers--left-1 {
+  left: 28%;
+  transform: translateX(-50%) scale(0.40);
+  z-index: 9;
+  filter: brightness(0.92);
+}
+
+.flowers--left-2 {
+  left: 10%;
+  transform: translateX(-50%) scale(0.42);
+  z-index: 10;
+}
+
+.flowers--right-1 {
+  left: 72%;
+  transform: translateX(-50%) scale(0.40);
+  z-index: 9;
+  filter: brightness(0.92);
+}
+
+.flowers--right-2 {
+  left: 90%;
+  transform: translateX(-50%) scale(0.42);
+  z-index: 10;
+}
+
+/* Background Depth Layer Clusters */
+.flowers--bg-left {
+  left: 39%;
+  bottom: 1.5vmin;
+  transform: translateX(-50%) scale(0.34);
+  filter: brightness(0.82) contrast(0.95);
+  opacity: 0.88;
+  z-index: 7;
+}
+
+.flowers--bg-right {
+  left: 61%;
+  bottom: 1.5vmin;
+  transform: translateX(-50%) scale(0.34);
+  filter: brightness(0.82) contrast(0.95);
+  opacity: 0.88;
+  z-index: 7;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (Tablets, Laptops, Mobile & iPhone 15 Pro Max)
+   ========================================================================== */
+
+/* Tablets & Medium Screens */
+@media (max-width: 992px) {
+  .flowers--center {
+    transform: translateX(-50%) scale(0.42);
+  }
+  .flowers--left-1 {
+    left: 24%;
+    transform: translateX(-50%) scale(0.36);
+  }
+  .flowers--left-2 {
+    left: 7%;
+    transform: translateX(-50%) scale(0.38);
+  }
+  .flowers--right-1 {
+    left: 76%;
+    transform: translateX(-50%) scale(0.36);
+  }
+  .flowers--right-2 {
+    left: 93%;
+    transform: translateX(-50%) scale(0.38);
+  }
+  .flowers--bg-left,
+  .flowers--bg-right {
+    display: none;
+  }
+}
+
+/* All Mobile Phones - Tailored specifically for iPhone 15 Pro Max (430px) and standard phones */
+@media (max-width: 600px) {
+  .birthday-counter {
+    top: calc(env(safe-area-inset-top, 0px) + 12px);
+    right: calc(env(safe-area-inset-right, 0px) + 12px);
+    padding: 6px 11px 8px 11px;
+    border-radius: 14px;
+  }
+
+  .counter-title {
+    font-size: 0.65rem;
+    letter-spacing: 0.8px;
+  }
+
+  .counter-sign {
+    font-size: 1.2rem;
+  }
+
+  .time-unit {
+    min-width: 27px;
+  }
+
+  .time-digit {
+    font-size: 1.0rem;
+  }
+
+  .time-label {
+    font-size: 0.46rem;
+  }
+
+  .time-colon {
+    font-size: 0.9rem;
+    margin-top: -4px;
+  }
+
+  /* Rich Panoramic Garden on Mobile */
+  .flowers--center {
+    left: 50%;
+    transform: translateX(-50%) scale(0.62);
+    z-index: 12;
+  }
+
+  .flowers--left-1 {
+    left: 18%;
+    transform: translateX(-50%) scale(0.52);
+    z-index: 10;
+    filter: brightness(0.95);
+  }
+
+  .flowers--right-1 {
+    left: 82%;
+    transform: translateX(-50%) scale(0.52);
+    z-index: 10;
+    filter: brightness(0.95);
+  }
+
+  /* Flanking wing clusters at edge for edge-to-edge lushness */
+  .flowers--left-2 {
+    display: block !important;
+    left: -2%;
+    transform: translateX(-50%) scale(0.44);
+    z-index: 8;
+    opacity: 0.82;
+  }
+
+  .flowers--right-2 {
+    display: block !important;
+    left: 102%;
+    transform: translateX(-50%) scale(0.44);
+    z-index: 8;
+    opacity: 0.82;
+  }
+
+  .flowers--bg-left {
+    display: block !important;
+    left: 34%;
+    bottom: 2vmin;
+    transform: translateX(-50%) scale(0.40);
+    opacity: 0.72;
+    z-index: 6;
+  }
+
+  .flowers--bg-right {
+    display: block !important;
+    left: 66%;
+    bottom: 2vmin;
+    transform: translateX(-50%) scale(0.40);
+    opacity: 0.72;
+    z-index: 6;
+  }
+
+  .garden__ground-glow {
+    height: 18vmin;
+  }
+}
+
+/* Compact phones (iPhone SE, Galaxy S compact, etc.) */
+@media (max-width: 380px) {
+  .birthday-counter {
+    padding: 5px 9px 7px 9px;
+  }
+  .time-digit {
+    font-size: 0.9rem;
+  }
+  .flowers--center {
+    transform: translateX(-50%) scale(0.55);
+  }
+  .flowers--left-1 {
+    left: 14%;
+    transform: translateX(-50%) scale(0.46);
+  }
+  .flowers--right-1 {
+    left: 86%;
+    transform: translateX(-50%) scale(0.46);
+  }
+  .flowers--left-2,
+  .flowers--right-2 {
+    display: none;
+  }
+}
+
+
+
+.flower,
+.flower__leafs,
+.flower__leaf,
+.flower__line,
+.flower__light,
+.flower__grass,
+.flower__g-long,
+.flower__g-right,
+.flower__g-front,
+.flower__g-fr,
+.long-g {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .flower {
@@ -44,6 +1028,8 @@ body {
   --fl-speed: 0.8s;
 }
 .flower--1 {
+  left: 0;
+  bottom: 10vmin;
   -webkit-animation: moving-flower-1 4s linear infinite;
           animation: moving-flower-1 4s linear infinite;
 }
@@ -77,13 +1063,13 @@ body {
           animation: blooming-leaf-left var(--fl-speed) 2s backwards;
 }
 .flower--2 {
-  left: 50%;
-  transform: rotate(20deg);
+  left: 5vmin;
+  bottom: 9vmin;
   -webkit-animation: moving-flower-2 4s linear infinite;
           animation: moving-flower-2 4s linear infinite;
 }
 .flower--2 .flower__line {
-  height: 60vmin;
+  height: 62vmin;
   -webkit-animation-delay: 0.6s;
           animation-delay: 0.6s;
 }
@@ -104,12 +1090,13 @@ body {
           animation: blooming-leaf-left var(--fl-speed) 1.3s backwards;
 }
 .flower--3 {
-  left: 50%;
-  transform: rotate(-15deg);
+  left: -5vmin;
+  bottom: 9vmin;
   -webkit-animation: moving-flower-3 4s linear infinite;
           animation: moving-flower-3 4s linear infinite;
 }
 .flower--3 .flower__line {
+  height: 63vmin;
   -webkit-animation-delay: 0.9s;
           animation-delay: 0.9s;
 }
@@ -150,69 +1137,300 @@ body {
   content: "";
   position: absolute;
   left: 0;
-  top: 0;
-  transform: translate(-50%, -100%);
-  width: 8vmin;
-  height: 8vmin;
-  background-color: #6bf0ff;
-  filter: blur(10vmin);
+  top: -2vmin;
+  transform: translate(-50%, -50%);
+  width: 22vmin;
+  height: 22vmin;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 190, 220, 0.22) 0%, rgba(255, 140, 180, 0.05) 45%, transparent 70%);
+  pointer-events: none;
 }
+
+/* Per-flower ambient bloom glows (seamless soft gradient fade) */
+.flower--1 .flower__leafs::after {
+  background: radial-gradient(circle at 50% 50%, rgba(255, 180, 210, 0.25) 0%, rgba(255, 140, 180, 0.06) 45%, transparent 70%);
+}
+.flower--2 .flower__leafs::after {
+  background: radial-gradient(circle at 50% 50%, rgba(220, 70, 120, 0.22) 0%, rgba(200, 50, 100, 0.05) 45%, transparent 70%);
+}
+.flower--3 .flower__leafs::after {
+  background: radial-gradient(circle at 50% 50%, rgba(255, 230, 240, 0.25) 0%, rgba(255, 200, 220, 0.06) 45%, transparent 70%);
+}
+.flower--6 .flower__leafs::after {
+  background: radial-gradient(circle at 50% 50%, rgba(255, 160, 200, 0.22) 0%, rgba(255, 120, 170, 0.05) 45%, transparent 70%);
+}
+.flower--7 .flower__leafs::after {
+  background: radial-gradient(circle at 50% 50%, rgba(255, 170, 180, 0.22) 0%, rgba(255, 130, 150, 0.05) 45%, transparent 70%);
+}
+.flower--8 .flower__leafs::after {
+  background: radial-gradient(circle at 50% 50%, rgba(230, 80, 130, 0.25) 0%, rgba(210, 50, 100, 0.06) 45%, transparent 70%);
+}
+
+/* ===== REALISTIC LILY PETAL BASE ===== */
 .flower__leaf {
   position: absolute;
   bottom: 0;
   left: 50%;
-  width: 8vmin;
-  height: 11vmin;
-  border-radius: 51% 49% 47% 53%/44% 45% 55% 69%;
-  background-color: #a7ffee;
-  background-image: linear-gradient(to top, #54b8aa, #a7ffee);
+  width: 5.6vmin;
+  height: 15vmin;
+  border-radius: 50% 50% 16% 16% / 62% 62% 28% 28%;
   transform-origin: bottom center;
-  opacity: 0.9;
-  box-shadow: inset 0 0 2vmin rgba(255, 255, 255, 0.5);
+  opacity: 0.98;
+  box-shadow:
+    inset 0 0 1.2vmin rgba(255, 255, 255, 0.7),
+    inset 0 -3.5vmin 2.5vmin rgba(180, 20, 80, 0.16),
+    0 0.2vmin 0.6vmin rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  will-change: transform;
 }
-.flower__leaf--1 {
-  transform: translate(-10%, 1%) rotateY(40deg) rotateX(-50deg);
-}
-.flower__leaf--2 {
-  transform: translate(-50%, -4%) rotateX(40deg);
-}
-.flower__leaf--3 {
-  transform: translate(-90%, 0%) rotateY(45deg) rotateX(50deg);
-}
-.flower__leaf--4 {
-  width: 8vmin;
-  height: 8vmin;
-  transform-origin: bottom left;
-  border-radius: 4vmin 10vmin 4vmin 4vmin;
-  transform: translate(0%, 18%) rotateX(70deg) rotate(-43deg);
-  background-image: linear-gradient(to top, #39c6d6, #a7ffee);
-  z-index: 1;
-  opacity: 0.8;
-}
-.flower__white-circle {
-  position: absolute;
-  left: -3.5vmin;
-  top: -3vmin;
-  width: 9vmin;
-  height: 4vmin;
-  border-radius: 50%;
-  background-color: #fff;
-}
-.flower__white-circle::after {
+
+/* Speckled spots near petal base & midrib (::before) */
+.flower__leaf::before {
   content: "";
   position: absolute;
-  left: 50%;
-  top: 45%;
-  transform: translate(-50%, -50%);
-  width: 60%;
-  height: 60%;
-  border-radius: inherit;
-  background-image: repeating-linear-gradient(135deg, rgba(0, 0, 0, 0.03) 0px, rgba(0, 0, 0, 0.03) 1px, transparent 1px, transparent 12px), repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.03) 0px, rgba(0, 0, 0, 0.03) 1px, transparent 1px, transparent 12px), repeating-linear-gradient(67.5deg, rgba(0, 0, 0, 0.03) 0px, rgba(0, 0, 0, 0.03) 1px, transparent 1px, transparent 12px), repeating-linear-gradient(135deg, rgba(0, 0, 0, 0.03) 0px, rgba(0, 0, 0, 0.03) 1px, transparent 1px, transparent 12px), repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.03) 0px, rgba(0, 0, 0, 0.03) 1px, transparent 1px, transparent 12px), repeating-linear-gradient(112.5deg, rgba(0, 0, 0, 0.03) 0px, rgba(0, 0, 0, 0.03) 1px, transparent 1px, transparent 12px), repeating-linear-gradient(112.5deg, rgba(0, 0, 0, 0.03) 0px, rgba(0, 0, 0, 0.03) 1px, transparent 1px, transparent 12px), repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.03) 0px, rgba(0, 0, 0, 0.03) 1px, transparent 1px, transparent 12px), repeating-linear-gradient(22.5deg, rgba(0, 0, 0, 0.03) 0px, rgba(0, 0, 0, 0.03) 1px, transparent 1px, transparent 12px), repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.03) 0px, rgba(0, 0, 0, 0.03) 1px, transparent 1px, transparent 12px), repeating-linear-gradient(22.5deg, rgba(0, 0, 0, 0.03) 0px, rgba(0, 0, 0, 0.03) 1px, transparent 1px, transparent 12px), repeating-linear-gradient(135deg, rgba(0, 0, 0, 0.03) 0px, rgba(0, 0, 0, 0.03) 1px, transparent 1px, transparent 12px), repeating-linear-gradient(157.5deg, rgba(0, 0, 0, 0.03) 0px, rgba(0, 0, 0, 0.03) 1px, transparent 1px, transparent 12px), repeating-linear-gradient(67.5deg, rgba(0, 0, 0, 0.03) 0px, rgba(0, 0, 0, 0.03) 1px, transparent 1px, transparent 12px), repeating-linear-gradient(67.5deg, rgba(0, 0, 0, 0.03) 0px, rgba(0, 0, 0, 0.03) 1px, transparent 1px, transparent 12px), linear-gradient(90deg, rgb(255, 235, 18), rgb(255, 206, 0));
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 54%;
+  background-image:
+    radial-gradient(circle at 48% 68%, #6a0e2d 1.3px, transparent 1.6px),
+    radial-gradient(circle at 38% 56%, #7a1235 1.1px, transparent 1.4px),
+    radial-gradient(circle at 58% 58%, #7a1235 1.1px, transparent 1.4px),
+    radial-gradient(circle at 45% 44%, #8c183e 1px, transparent 1.3px),
+    radial-gradient(circle at 55% 46%, #8c183e 1px, transparent 1.3px),
+    radial-gradient(circle at 34% 74%, #6a0e2d 1px, transparent 1.3px),
+    radial-gradient(circle at 62% 72%, #6a0e2d 1px, transparent 1.3px),
+    radial-gradient(circle at 42% 32%, #9e1e48 0.9px, transparent 1.2px),
+    radial-gradient(circle at 56% 34%, #9e1e48 0.9px, transparent 1.2px),
+    radial-gradient(circle at 48% 20%, #b22456 0.8px, transparent 1.1px),
+    radial-gradient(circle at 40% 82%, #5a0a24 1.3px, transparent 1.6px),
+    radial-gradient(circle at 58% 84%, #5a0a24 1.3px, transparent 1.6px);
+  z-index: 3;
+  opacity: 0.75;
+  pointer-events: none;
 }
+
+/* Lily Petal Midrib Crease (::after) */
+.flower__leaf::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0.35vmin;
+  height: 85%;
+  background: linear-gradient(to top, #62961e 0%, #b51a56 30%, #e65c8e 70%, rgba(255, 255, 255, 0.45) 95%, transparent 100%);
+  box-shadow: 0 0 1px rgba(255, 255, 255, 0.3);
+  z-index: 4;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* ===== STARGAZER LILY - Flower 1 (Classic: Raspberry star + lime throat + white ruffle) ===== */
+.flower--1 .flower__leaf {
+  background-color: #ffffff;
+  background-image:
+    linear-gradient(to top, #86bd26 0%, #d0e444 8%, transparent 20%),
+    linear-gradient(to right,
+      #ffffff 0%, #fff0f6 14%,
+      #f678a6 26%, #d81b68 38%, #b50e50 50%, #d81b68 62%, #f678a6 74%,
+      #fff0f6 86%, #ffffff 100%);
+}
+.flower--1 .flower__leaf::before { opacity: 0.7; }
+
+/* ===== RUBRUM / DEEP MAGENTA LILY - Flower 2 (Rich velvet magenta stripes) ===== */
+.flower--2 .flower__leaf {
+  background-color: #fff0f5;
+  background-image:
+    linear-gradient(to top, #7aa820 0%, #bed438 8%, transparent 18%),
+    linear-gradient(to right,
+      #fff0f5 0%, #f7b4ce 14%,
+      #cc1c62 26%, #9c0b44 38%, #7e0634 50%, #9c0b44 62%, #cc1c62 74%,
+      #f7b4ce 86%, #fff0f5 100%);
+}
+.flower--2 .flower__leaf::before { opacity: 0.8; }
+
+/* ===== CASABLANCA / PEARL BLUSH LILY - Flower 3 (Porcelain white with delicate blush heart) ===== */
+.flower--3 .flower__leaf {
+  background-color: #ffffff;
+  background-image:
+    linear-gradient(to top, #94c028 0%, #dce85c 9%, transparent 22%),
+    linear-gradient(to right,
+      #ffffff 0%, #ffffff 20%,
+      #fce4ee 32%, #f48fb1 44%, #ec407a 50%, #f48fb1 56%, #fce4ee 68%,
+      #ffffff 80%, #ffffff 100%);
+}
+.flower--3 .flower__leaf::before { opacity: 0.4; }
+
+/* ===== SAKURA PINK LILY - Flower 6 (Sweet romantic cherry-pink) ===== */
+.flower--6 .flower__leaf {
+  background-color: #ffffff;
+  background-image:
+    linear-gradient(to top, #82b624 0%, #c8dc3c 8%, transparent 19%),
+    linear-gradient(to right,
+      #ffffff 0%, #fff2f8 14%,
+      #f882b4 28%, #e42074 42%, #c8105c 50%, #e42074 58%, #f882b4 72%,
+      #fff2f8 86%, #ffffff 100%);
+}
+.flower--6 .flower__leaf::before { opacity: 0.65; }
+
+/* ===== SUNSET CORAL LILY - Flower 7 (Warm coral-pink with golden center) ===== */
+.flower--7 .flower__leaf {
+  background-color: #ffffff;
+  background-image:
+    linear-gradient(to top, #8cb824 0%, #d4e044 8%, transparent 19%),
+    linear-gradient(to right,
+      #ffffff 0%, #fff4f4 14%,
+      #f87c90 28%, #e2284c 42%, #c41434 50%, #e2284c 58%, #f87c90 72%,
+      #fff4f4 86%, #ffffff 100%);
+}
+.flower--7 .flower__leaf::before { opacity: 0.6; }
+
+/* ===== ROYAL ORIENTAL LILY - Flower 8 (Grand fuchsia-crimson stargazer) ===== */
+.flower--8 .flower__leaf {
+  background-color: #ffffff;
+  background-image:
+    linear-gradient(to top, #7aa820 0%, #c4d838 8%, transparent 20%),
+    linear-gradient(to right,
+      #ffffff 0%, #fff0f6 14%,
+      #ee5a94 26%, #c81258 40%, #a40644 50%, #c81258 60%, #ee5a94 74%,
+      #fff0f6 86%, #ffffff 100%);
+}
+.flower--8 .flower__leaf::before { opacity: 0.75; }
+
+/* ===== 6-PETAL BOTANICAL STAR ARRANGEMENT ===== */
+/* Outer whorl (3 sepals - flared with natural recurve backward) */
+.flower__leaf--1 {
+  width: 5.4vmin;
+  height: 15.2vmin;
+  transform: translate(-12%, 1%) rotateY(32deg) rotateX(-52deg);
+}
+.flower__leaf--2 {
+  width: 5.5vmin;
+  height: 15.5vmin;
+  transform: translate(-50%, -6%) rotateX(42deg);
+}
+.flower__leaf--3 {
+  width: 5.4vmin;
+  height: 15.2vmin;
+  transform: translate(-88%, 1%) rotateY(38deg) rotateX(54deg);
+}
+/* Inner whorl (3 petals - wider, overlapping outer gaps, cupping forward) */
+.flower__leaf--4 {
+  width: 6.2vmin;
+  height: 14.5vmin;
+  transform-origin: bottom center;
+  border-radius: 50% 50% 18% 18% / 62% 62% 28% 28%;
+  transform: translate(-8%, 8%) rotateX(62deg) rotate(-42deg);
+  z-index: 3;
+  opacity: 0.95;
+}
+.flower__leaf--5 {
+  width: 6.2vmin;
+  height: 14.5vmin;
+  transform-origin: bottom center;
+  border-radius: 50% 50% 18% 18% / 62% 62% 28% 28%;
+  transform: translate(-30%, -3%) rotateY(-36deg) rotateX(-44deg);
+  z-index: 3;
+  opacity: 0.95;
+}
+.flower__leaf--6 {
+  width: 6.2vmin;
+  height: 14.5vmin;
+  transform-origin: bottom center;
+  border-radius: 50% 50% 18% 18% / 62% 62% 28% 28%;
+  transform: translate(-72%, 6%) rotateY(-30deg) rotateX(60deg);
+  z-index: 3;
+  opacity: 0.94;
+}
+
+/* ===== REALISTIC LILY CENTER (Throat Star + 3D Stamens & Pistil) ===== */
+.flower__white-circle {
+  position: absolute;
+  left: -2vmin;
+  top: -1.5vmin;
+  width: 4vmin;
+  height: 2.6vmin;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%,
+    #a6db30 0%, #70a41a 55%,
+    rgba(112, 164, 26, 0.2) 80%,
+    transparent 100%);
+  box-shadow: 0 0 0.8vmin rgba(166, 219, 48, 0.25);
+  z-index: 2;
+}
+.flower__white-circle::after {
+  display: none;
+}
+
+/* 3D Stamens & Pistil Architecture */
+.flower__stamens {
+  position: absolute;
+  left: 0;
+  top: -0.5vmin;
+  width: 0;
+  height: 0;
+  z-index: 4;
+  transform-style: preserve-3d;
+}
+.flower__stamen {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0.22vmin;
+  height: 4.8vmin;
+  background: linear-gradient(to top, rgba(130, 185, 38, 0.7) 0%, #fdf8e2 60%, #fffbe6 100%);
+  transform-origin: bottom center;
+  border-radius: 1px;
+}
+/* Pollen-laden oscillating anther on stamen apex */
+.flower__stamen::after {
+  content: "";
+  position: absolute;
+  top: -0.3vmin;
+  left: 50%;
+  transform: translateX(-50%) rotate(25deg);
+  width: 0.9vmin;
+  height: 0.38vmin;
+  background: #60180a;
+  border-radius: 2px;
+  box-shadow: 0 0 2px #d35400, inset 0 0 1px #e67e22;
+}
+/* Central graceful pistil with 3-lobed stigma */
+.flower__pistil {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform: translateX(-50%) rotateX(-10deg);
+  width: 0.28vmin;
+  height: 5.6vmin;
+  background: linear-gradient(to top, #487214 0%, #78b022 70%, #9cd830 100%);
+  border-radius: 1px;
+  transform-origin: bottom center;
+}
+.flower__pistil::after {
+  content: "";
+  position: absolute;
+  top: -0.35vmin;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0.65vmin;
+  height: 0.45vmin;
+  background: #345210;
+  border-radius: 40%;
+  box-shadow: 0 0 2px #68981e;
+}
+/* 3D outward curving stamen positions */
+.flower__stamen--1 { transform: rotate(-60deg) rotateX(32deg); }
+.flower__stamen--2 { transform: rotate(-32deg) rotateX(20deg); }
+.flower__stamen--3 { transform: rotate(-4deg) rotateX(28deg); }
+.flower__stamen--4 { transform: rotate(22deg) rotateX(22deg); }
+.flower__stamen--5 { transform: rotate(50deg) rotateX(34deg); }
+.flower__stamen--6 { transform: rotate(78deg) rotateX(36deg); }
 .flower__line {
   height: 55vmin;
   width: 1.5vmin;
-  background-image: linear-gradient(to left, rgba(0, 0, 0, 0.2), transparent, rgba(255, 255, 255, 0.2)), linear-gradient(to top, transparent 10%, #14757a, #39c6d6);
+  background-image: linear-gradient(to left, rgba(0, 0, 0, 0.2), transparent, rgba(255, 255, 255, 0.2)), linear-gradient(to top, transparent 10%, #29482f, #5c8d63);
   box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.5);
   -webkit-animation: grow-flower-tree 4s backwards;
           animation: grow-flower-tree 4s backwards;
@@ -227,7 +1445,7 @@ body {
   height: var(--h);
   border-top-right-radius: var(--h);
   border-bottom-left-radius: var(--h);
-  background-image: linear-gradient(to top, rgba(20, 117, 122, 0.4), #39c6d6);
+  background-image: linear-gradient(to top, rgba(41, 72, 47, 0.5), #5c8d63);
 }
 .flower__line__leaf--1 {
   transform: rotate(70deg) rotateY(30deg);
@@ -264,14 +1482,15 @@ body {
   bottom: 0vmin;
   width: 1vmin;
   height: 1vmin;
-  background-color: rgb(255, 251, 0);
+  background: radial-gradient(circle, #ffe599 35%, rgba(255, 229, 153, 0.35) 70%, transparent 100%);
   border-radius: 50%;
-  filter: blur(0.2vmin);
+  box-shadow: 0 0 0.4vmin rgba(255, 229, 153, 0.6);
   -webkit-animation: light-ans 4s linear infinite backwards;
           animation: light-ans 4s linear infinite backwards;
 }
 .flower__light:nth-child(odd) {
-  background-color: #23f0ff;
+  background: radial-gradient(circle, #ffccd5 35%, rgba(255, 204, 213, 0.35) 70%, transparent 100%);
+  box-shadow: 0 0 0.4vmin rgba(255, 204, 213, 0.6);
 }
 .flower__light--1 {
   left: -2vmin;
@@ -314,7 +1533,7 @@ body {
           animation-delay: 3.5s;
 }
 .flower__grass {
-  --c: #159faa;
+  --c: #4e7c54;
   --line-w: 1.5vmin;
   position: absolute;
   bottom: 12vmin;
@@ -529,14 +1748,13 @@ body {
   right: 0%;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  filter: blur(1.5vmin);
+  background: radial-gradient(ellipse at 50% 60%, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.2) 50%, transparent 80%);
   z-index: 100;
 }
 .flower__g-long {
   --w: 2vmin;
   --h: 6vmin;
-  --c: #159faa;
+  --c: #4e7c54;
   position: absolute;
   bottom: 10vmin;
   left: -3vmin;
@@ -592,9 +1810,9 @@ body {
   width: 30vmin;
   height: 50vmin;
   border-top-left-radius: 100%;
-  border-left: 2vmin solid #079097;
+  border-left: 2vmin solid #35583b;
   background-image: linear-gradient(to bottom, transparent, var(--dark-color) 60%);
-  -webkit-mask-image: linear-gradient(to top, transparent 30%, #079097 60%);
+  -webkit-mask-image: linear-gradient(to top, transparent 30%, #35583b 60%);
 }
 .flower__g-right--1 {
   -webkit-animation: flower-g-right-ans 2.5s linear infinite;
@@ -608,7 +1826,6 @@ body {
 }
 .flower__g-right--2 .leaf {
   height: 75vmin;
-  filter: blur(0.3vmin);
   opacity: 0.8;
 }
 @-webkit-keyframes flower-g-right-ans {
@@ -672,7 +1889,7 @@ body {
 .flower__g-front__line {
   width: 0.3vmin;
   height: 20vmin;
-  background-image: linear-gradient(to top, transparent, #079097, transparent 100%);
+  background-image: linear-gradient(to top, transparent, #35583b, transparent 100%);
   position: relative;
 }
 .flower__g-front__leaf-wrapper {
@@ -701,13 +1918,13 @@ body {
 .flower__g-front__leaf-wrapper--2 {
   top: -8vmin;
   transform: rotateY(-180deg) scale(0.7) !important;
-  -webkit-animation: flower__g-front__leaf-left-ans-2 1s 4.6s ease-in backwards !important;
-          animation: flower__g-front__leaf-left-ans-2 1s 4.6s ease-in backwards !important;
+  -webkit-animation: flower__g-front__leaf-left-ans-2 1s 5.2s ease-in backwards !important;
+          animation: flower__g-front__leaf-left-ans-2 1s 5.2s ease-in backwards !important;
 }
 .flower__g-front__leaf-wrapper--3 {
   top: -3vmin;
-  -webkit-animation: flower__g-front__leaf-ans 1s 4.6s ease-in backwards;
-          animation: flower__g-front__leaf-ans 1s 4.6s ease-in backwards;
+  -webkit-animation: flower__g-front__leaf-ans 1s 4.9s ease-in backwards !important;
+          animation: flower__g-front__leaf-ans 1s 4.9s ease-in backwards !important;
 }
 .flower__g-front__leaf-wrapper--4 {
   top: -3vmin;
@@ -725,33 +1942,23 @@ body {
     transform: rotateY(-180deg) scale(0);
   }
 }
-.flower__g-front__leaf-wrapper--5, .flower__g-front__leaf-wrapper--6 {
-  top: 2vmin;
-}
-.flower__g-front__leaf-wrapper--7, .flower__g-front__leaf-wrapper--8 {
-  top: 6.5vmin;
-}
-.flower__g-front__leaf-wrapper--2 {
-  -webkit-animation-delay: 5.2s !important;
-          animation-delay: 5.2s !important;
-}
-.flower__g-front__leaf-wrapper--3 {
-  -webkit-animation-delay: 4.9s !important;
-          animation-delay: 4.9s !important;
-}
 .flower__g-front__leaf-wrapper--5 {
+  top: 2vmin;
   -webkit-animation-delay: 4.3s !important;
           animation-delay: 4.3s !important;
 }
 .flower__g-front__leaf-wrapper--6 {
+  top: 2vmin;
   -webkit-animation-delay: 4.1s !important;
           animation-delay: 4.1s !important;
 }
 .flower__g-front__leaf-wrapper--7 {
+  top: 6.5vmin;
   -webkit-animation-delay: 3.8s !important;
           animation-delay: 3.8s !important;
 }
 .flower__g-front__leaf-wrapper--8 {
+  top: 6.5vmin;
   -webkit-animation-delay: 3.5s !important;
           animation-delay: 3.5s !important;
 }
@@ -779,10 +1986,10 @@ body {
   width: 10vmin;
   height: 10vmin;
   border-radius: 100% 0% 0% 100%/100% 100% 0% 0%;
-  box-shadow: inset 0 2px 1vmin hsla(184deg, 97%, 58%, 0.2);
-  background-image: linear-gradient(to bottom left, transparent, var(--dark-color)), linear-gradient(to bottom right, #159faa 50%, transparent 50%, transparent);
-  -webkit-mask-image: linear-gradient(to bottom right, #159faa 50%, transparent 50%, transparent);
-  mask-image: linear-gradient(to bottom right, #159faa 50%, transparent 50%, transparent);
+  box-shadow: inset 0 2px 1vmin rgba(247, 168, 196, 0.25);
+  background-image: linear-gradient(to bottom left, transparent, var(--dark-color)), linear-gradient(to bottom right, #4e7c54 50%, transparent 50%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom right, #4e7c54 50%, transparent 50%, transparent);
+  mask-image: linear-gradient(to bottom right, #4e7c54 50%, transparent 50%, transparent);
 }
 .flower__g-fr {
   position: absolute;
@@ -813,8 +2020,8 @@ body {
   width: 30vmin;
   height: 50vmin;
   border-top-left-radius: 100%;
-  border-left: 2vmin solid #079097;
-  -webkit-mask-image: linear-gradient(to top, transparent 25%, #079097 50%);
+  border-left: 2vmin solid #35583b;
+  -webkit-mask-image: linear-gradient(to top, transparent 25%, #35583b 50%);
   position: relative;
   z-index: 1;
 }
@@ -825,9 +2032,9 @@ body {
   width: 10vmin;
   height: 10vmin;
   border-radius: 100% 0% 0% 100%/100% 100% 0% 0%;
-  box-shadow: inset 0 2px 1vmin hsla(184deg, 97%, 58%, 0.2);
-  background-image: linear-gradient(to bottom left, transparent, var(--dark-color) 98%), linear-gradient(to bottom right, #23f0ff 45%, transparent 50%, transparent);
-  -webkit-mask-image: linear-gradient(135deg, #159faa 40%, transparent 50%, transparent);
+  box-shadow: inset 0 2px 1vmin rgba(247, 168, 196, 0.25);
+  background-image: linear-gradient(to bottom left, transparent, var(--dark-color) 98%), linear-gradient(to bottom right, #f7a8c4 45%, transparent 50%, transparent);
+  -webkit-mask-image: linear-gradient(135deg, #4e7c54 40%, transparent 50%, transparent);
 }
 .flower__g-fr__leaf--1 {
   left: 20vmin;
@@ -956,7 +2163,7 @@ body {
   transform: scale(0.8) rotate(-5deg);
 }
 .long-g--1 .leaf {
-  -webkit-mask-image: linear-gradient(to top, transparent 40%, #079097 80%) !important;
+  -webkit-mask-image: linear-gradient(to top, transparent 40%, #35583b 80%) !important;
 }
 .long-g--1 .leaf--1 {
   --w: 5vmin;
@@ -971,7 +2178,7 @@ body {
   transform: scale(0.6) rotateX(60deg);
 }
 .long-g--2 .leaf, .long-g--3 .leaf {
-  -webkit-mask-image: linear-gradient(to top, transparent 50%, #079097 80%) !important;
+  -webkit-mask-image: linear-gradient(to top, transparent 50%, #35583b 80%) !important;
 }
 .long-g--2 .leaf--1, .long-g--3 .leaf--1 {
   left: -1vmin;
@@ -982,7 +2189,7 @@ body {
   bottom: 0vmin;
 }
 .long-g--3 .leaf {
-  -webkit-mask-image: linear-gradient(to top, transparent 40%, #079097 80%) !important;
+  -webkit-mask-image: linear-gradient(to top, transparent 40%, #35583b 80%) !important;
 }
 .long-g--4 {
   left: 25vmin;
@@ -991,7 +2198,7 @@ body {
   transform: scale(0.6) rotateX(60deg);
 }
 .long-g--4 .leaf {
-  -webkit-mask-image: linear-gradient(to top, transparent 50%, #079097 80%) !important;
+  -webkit-mask-image: linear-gradient(to top, transparent 50%, #35583b 80%) !important;
 }
 .long-g--5 {
   left: 42vmin;
@@ -1002,14 +2209,12 @@ body {
   left: 0vmin;
   bottom: -20vmin;
   z-index: 100;
-  filter: blur(0.3vmin);
   transform: scale(0.8) rotate(2deg);
 }
 .long-g--7 {
   left: 35vmin;
   bottom: 20vmin;
   z-index: -1;
-  filter: blur(0.3vmin);
   transform: scale(0.6) rotate(2deg);
   opacity: 0.7;
 }
@@ -1128,49 +2333,45 @@ body {
 @-webkit-keyframes light-ans {
   0% {
     opacity: 0;
-    transform: translateY(0vmin);
+    transform: translateY(0vmin) scale(0.6);
   }
   25% {
     opacity: 1;
-    transform: translateY(-5vmin) translateX(-2vmin);
+    transform: translateY(-5vmin) translateX(-2vmin) scale(1);
   }
   50% {
-    opacity: 1;
-    transform: translateY(-15vmin) translateX(2vmin);
-    filter: blur(0.2vmin);
+    opacity: 0.9;
+    transform: translateY(-15vmin) translateX(2vmin) scale(1.1);
   }
   75% {
-    transform: translateY(-20vmin) translateX(-2vmin);
-    filter: blur(0.2vmin);
+    opacity: 0.7;
+    transform: translateY(-20vmin) translateX(-2vmin) scale(0.9);
   }
   100% {
-    transform: translateY(-30vmin);
     opacity: 0;
-    filter: blur(1vmin);
+    transform: translateY(-30vmin) scale(0.4);
   }
 }
 @keyframes light-ans {
   0% {
     opacity: 0;
-    transform: translateY(0vmin);
+    transform: translateY(0vmin) scale(0.6);
   }
   25% {
     opacity: 1;
-    transform: translateY(-5vmin) translateX(-2vmin);
+    transform: translateY(-5vmin) translateX(-2vmin) scale(1);
   }
   50% {
-    opacity: 1;
-    transform: translateY(-15vmin) translateX(2vmin);
-    filter: blur(0.2vmin);
+    opacity: 0.9;
+    transform: translateY(-15vmin) translateX(2vmin) scale(1.1);
   }
   75% {
-    transform: translateY(-20vmin) translateX(-2vmin);
-    filter: blur(0.2vmin);
+    opacity: 0.7;
+    transform: translateY(-20vmin) translateX(-2vmin) scale(0.9);
   }
   100% {
-    transform: translateY(-30vmin);
     opacity: 0;
-    filter: blur(1vmin);
+    transform: translateY(-30vmin) scale(0.4);
   }
 }
 @-webkit-keyframes moving-flower-1 {
@@ -1210,7 +2411,7 @@ body {
     transform: rotate(-18deg);
   }
   50% {
-    transform: rotate(-20deg) rotateY(-10deg);
+    transform: rotate(-21deg) rotateY(-10deg);
   }
 }
 @keyframes moving-flower-3 {
@@ -1218,7 +2419,87 @@ body {
     transform: rotate(-18deg);
   }
   50% {
-    transform: rotate(-20deg) rotateY(-10deg);
+    transform: rotate(-21deg) rotateY(-10deg);
+  }
+}
+@-webkit-keyframes moving-flower-4 {
+  0%, 100% {
+    transform: rotate(-10deg);
+  }
+  50% {
+    transform: rotate(-14deg);
+  }
+}
+@keyframes moving-flower-4 {
+  0%, 100% {
+    transform: rotate(-10deg);
+  }
+  50% {
+    transform: rotate(-14deg);
+  }
+}
+@-webkit-keyframes moving-flower-5 {
+  0%, 100% {
+    transform: rotate(14deg);
+  }
+  50% {
+    transform: rotate(18deg);
+  }
+}
+@keyframes moving-flower-5 {
+  0%, 100% {
+    transform: rotate(14deg);
+  }
+  50% {
+    transform: rotate(18deg);
+  }
+}
+@-webkit-keyframes moving-flower-6 {
+  0%, 100% {
+    transform: rotate(-28deg);
+  }
+  50% {
+    transform: rotate(-33deg) rotateY(-8deg);
+  }
+}
+@keyframes moving-flower-6 {
+  0%, 100% {
+    transform: rotate(-28deg);
+  }
+  50% {
+    transform: rotate(-33deg) rotateY(-8deg);
+  }
+}
+@-webkit-keyframes moving-flower-7 {
+  0%, 100% {
+    transform: rotate(27deg);
+  }
+  50% {
+    transform: rotate(32deg) rotateY(8deg);
+  }
+}
+@keyframes moving-flower-7 {
+  0%, 100% {
+    transform: rotate(27deg);
+  }
+  50% {
+    transform: rotate(32deg) rotateY(8deg);
+  }
+}
+@-webkit-keyframes moving-flower-8 {
+  0%, 100% {
+    transform: rotate(-6deg);
+  }
+  50% {
+    transform: rotate(-9deg);
+  }
+}
+@keyframes moving-flower-8 {
+  0%, 100% {
+    transform: rotate(-6deg);
+  }
+  50% {
+    transform: rotate(-9deg);
   }
 }
 @-webkit-keyframes blooming-leaf-right {
@@ -1315,7 +2596,909 @@ body {
     transform: scale(0);
   }
 }
+
+/* ============================================
+   ROSES
+   ============================================ */
+
+/* Rose 1 positioning */
+.flower--4 {
+  left: -11vmin;
+  bottom: 7vmin;
+  -webkit-animation: moving-flower-4 4.8s linear infinite;
+          animation: moving-flower-4 4.8s linear infinite;
+}
+.flower--4 .flower__line {
+  height: 48vmin;
+  -webkit-animation-delay: 0.4s;
+          animation-delay: 0.4s;
+}
+.flower--4 .flower__line__leaf--1 {
+  -webkit-animation: blooming-leaf-right 0.8s 1.8s backwards;
+          animation: blooming-leaf-right 0.8s 1.8s backwards;
+}
+.flower--4 .flower__line__leaf--3 {
+  -webkit-animation: blooming-leaf-left 0.8s 1.5s backwards;
+          animation: blooming-leaf-left 0.8s 1.5s backwards;
+}
+.flower__leafs--4 {
+  -webkit-animation-delay: 1.3s;
+          animation-delay: 1.3s;
+}
+
+/* Rose 2 positioning */
+.flower--5 {
+  left: 11vmin;
+  bottom: 6vmin;
+  -webkit-animation: moving-flower-5 4.5s linear infinite;
+          animation: moving-flower-5 4.5s linear infinite;
+}
+.flower--5 .flower__line {
+  height: 42vmin;
+  -webkit-animation-delay: 0.7s;
+          animation-delay: 0.7s;
+}
+.flower--5 .flower__line__leaf--1 {
+  -webkit-animation: blooming-leaf-right 0.8s 2.2s backwards;
+          animation: blooming-leaf-right 0.8s 2.2s backwards;
+}
+.flower--5 .flower__line__leaf--4 {
+  -webkit-animation: blooming-leaf-left 0.8s 2s backwards;
+          animation: blooming-leaf-left 0.8s 2s backwards;
+}
+.flower__leafs--5 {
+  -webkit-animation-delay: 1.9s;
+          animation-delay: 1.9s;
+}
+
+/* Rose petal shape - rounder, shorter, cupped */
+.flower--4 .flower__leaf,
+.flower--5 .flower__leaf {
+  width: 5.5vmin;
+  height: 7vmin;
+  border-radius: 50% 50% 42% 42% / 58% 58% 42% 42%;
+  box-shadow:
+    inset 0 0 1.5vmin rgba(255, 255, 255, 0.45),
+    inset 0 -1.5vmin 2vmin rgba(180, 50, 80, 0.18),
+    0 0 0.5vmin rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* No speckles, lily veins, or stamens on roses */
+.flower--4 .flower__leaf::before,
+.flower--5 .flower__leaf::before,
+.flower--4 .flower__leaf::after,
+.flower--5 .flower__leaf::after,
+.flower--4 .flower__stamens,
+.flower--5 .flower__stamens {
+  display: none !important;
+}
+
+/* ============================================
+   ADDITIONAL LILIES (Flowers 6, 7, 8)
+   ============================================ */
+
+/* Flower 6 - Left Blooming Lily */
+.flower--6 {
+  left: -14vmin;
+  bottom: 8vmin;
+  -webkit-animation: moving-flower-6 4.4s linear infinite;
+          animation: moving-flower-6 4.4s linear infinite;
+}
+.flower--6 .flower__line {
+  height: 58vmin;
+  -webkit-animation-delay: 0.5s;
+          animation-delay: 0.5s;
+}
+.flower--6 .flower__line__leaf--1 {
+  -webkit-animation: blooming-leaf-right var(--fl-speed) 1.8s backwards;
+          animation: blooming-leaf-right var(--fl-speed) 1.8s backwards;
+}
+.flower--6 .flower__line__leaf--2 {
+  -webkit-animation: blooming-leaf-right var(--fl-speed) 1.6s backwards;
+          animation: blooming-leaf-right var(--fl-speed) 1.6s backwards;
+}
+.flower--6 .flower__line__leaf--3 {
+  -webkit-animation: blooming-leaf-left var(--fl-speed) 1.4s backwards;
+          animation: blooming-leaf-left var(--fl-speed) 1.4s backwards;
+}
+.flower--6 .flower__line__leaf--4 {
+  -webkit-animation: blooming-leaf-left var(--fl-speed) 1.2s backwards;
+          animation: blooming-leaf-left var(--fl-speed) 1.2s backwards;
+}
+.flower__leafs--6 {
+  -webkit-animation-delay: 1.5s;
+          animation-delay: 1.5s;
+}
+
+/* Flower 7 - Right Blooming Lily */
+.flower--7 {
+  left: 14vmin;
+  bottom: 8vmin;
+  -webkit-animation: moving-flower-7 4.2s linear infinite;
+          animation: moving-flower-7 4.2s linear infinite;
+}
+.flower--7 .flower__line {
+  height: 60vmin;
+  -webkit-animation-delay: 0.7s;
+          animation-delay: 0.7s;
+}
+.flower--7 .flower__line__leaf--1 {
+  -webkit-animation: blooming-leaf-right var(--fl-speed) 2.2s backwards;
+          animation: blooming-leaf-right var(--fl-speed) 2.2s backwards;
+}
+.flower--7 .flower__line__leaf--2 {
+  -webkit-animation: blooming-leaf-right var(--fl-speed) 2.0s backwards;
+          animation: blooming-leaf-right var(--fl-speed) 2.0s backwards;
+}
+.flower--7 .flower__line__leaf--3 {
+  -webkit-animation: blooming-leaf-left var(--fl-speed) 1.8s backwards;
+          animation: blooming-leaf-left var(--fl-speed) 1.8s backwards;
+}
+.flower--7 .flower__line__leaf--4 {
+  -webkit-animation: blooming-leaf-left var(--fl-speed) 1.6s backwards;
+          animation: blooming-leaf-left var(--fl-speed) 1.6s backwards;
+}
+.flower__leafs--7 {
+  -webkit-animation-delay: 1.8s;
+          animation-delay: 1.8s;
+}
+
+/* Flower 8 - Tall Grand Lily (Center-Left) */
+.flower--8 {
+  left: -2vmin;
+  bottom: 12vmin;
+  -webkit-animation: moving-flower-8 4.6s linear infinite;
+          animation: moving-flower-8 4.6s linear infinite;
+}
+.flower--8 .flower__line {
+  height: 77vmin;
+  -webkit-animation-delay: 0.4s;
+          animation-delay: 0.4s;
+}
+.flower--8 .flower__line__leaf--1 {
+  -webkit-animation: blooming-leaf-right var(--fl-speed) 2.2s backwards;
+          animation: blooming-leaf-right var(--fl-speed) 2.2s backwards;
+}
+.flower--8 .flower__line__leaf--2 {
+  -webkit-animation: blooming-leaf-right var(--fl-speed) 2.0s backwards;
+          animation: blooming-leaf-right var(--fl-speed) 2.0s backwards;
+}
+.flower--8 .flower__line__leaf--3 {
+  -webkit-animation: blooming-leaf-left var(--fl-speed) 1.8s backwards;
+          animation: blooming-leaf-left var(--fl-speed) 1.8s backwards;
+}
+.flower--8 .flower__line__leaf--4 {
+  -webkit-animation: blooming-leaf-left var(--fl-speed) 1.6s backwards;
+          animation: blooming-leaf-left var(--fl-speed) 1.6s backwards;
+}
+.flower--8 .flower__line__leaf--5 {
+  -webkit-animation: blooming-leaf-right var(--fl-speed) 1.4s backwards;
+          animation: blooming-leaf-right var(--fl-speed) 1.4s backwards;
+}
+.flower--8 .flower__line__leaf--6 {
+  -webkit-animation: blooming-leaf-left var(--fl-speed) 1.2s backwards;
+          animation: blooming-leaf-left var(--fl-speed) 1.2s backwards;
+}
+.flower__leafs--8 {
+  -webkit-animation-delay: 1.3s;
+          animation-delay: 1.3s;
+}
+
+/* Rose 1 - Soft Pink Rose */
+.flower--4 .flower__leaf {
+  background-image: radial-gradient(
+    ellipse at 50% 110%,
+    #d64d73 0%,
+    #e87898 22%,
+    #f4a8be 42%,
+    #fad0df 65%,
+    #fff0f4 90%,
+    #fff8fa 100%
+  );
+}
+
+/* Rose 2 - Deep Dusty Rose */
+.flower--5 .flower__leaf {
+  background-image: radial-gradient(
+    ellipse at 50% 110%,
+    #8b1538 0%,
+    #b03050 18%,
+    #d05070 35%,
+    #e08898 55%,
+    #f0c0c8 78%,
+    #fae0e4 100%
+  );
+}
+
+/* Rose petal arrangement - concentric cup */
+/* Outer petals - open, wide */
+.flower--4 .flower__leaf--1,
+.flower--5 .flower__leaf--1 {
+  transform: translate(-5%, 4%) rotateY(22deg) rotateX(-32deg);
+}
+.flower--4 .flower__leaf--2,
+.flower--5 .flower__leaf--2 {
+  transform: translate(-50%, 0%) rotateX(-28deg);
+}
+.flower--4 .flower__leaf--3,
+.flower--5 .flower__leaf--3 {
+  transform: translate(-95%, 4%) rotateY(-22deg) rotateX(-32deg);
+}
+/* Middle ring - slightly smaller, more upright */
+.flower--4 .flower__leaf--4,
+.flower--5 .flower__leaf--4 {
+  width: 4.5vmin;
+  height: 5.8vmin;
+  transform: translate(-12%, -6%) rotateX(-18deg) rotateY(14deg) rotate(-22deg);
+  z-index: 2;
+}
+.flower--4 .flower__leaf--5,
+.flower--5 .flower__leaf--5 {
+  width: 4.5vmin;
+  height: 5.8vmin;
+  transform: translate(-78%, -6%) rotateX(-18deg) rotateY(-14deg) rotate(22deg);
+  z-index: 2;
+}
+/* Inner bud - tight center spiral */
+.flower--4 .flower__leaf--6,
+.flower--5 .flower__leaf--6 {
+  width: 3.2vmin;
+  height: 4.2vmin;
+  border-radius: 50%;
+  transform: translate(-40%, -14%) rotateX(-8deg);
+  z-index: 3;
+  opacity: 0.95;
+}
+/* Deeper inner-bud color for each rose */
+.flower--4 .flower__leaf--6 {
+  background-image: radial-gradient(
+    ellipse at 50% 100%,
+    #c03058 0%, #d86080 45%, #f0a0b8 100%
+  );
+}
+.flower--5 .flower__leaf--6 {
+  background-image: radial-gradient(
+    ellipse at 50% 100%,
+    #701028 0%, #a03050 45%, #d07080 100%
+  );
+}
+
+/* Rose center - hidden bud under petals */
+.flower--4 .flower__white-circle,
+.flower--5 .flower__white-circle {
+  width: 4vmin;
+  height: 2.2vmin;
+  left: -1vmin;
+  top: -2.2vmin;
+  background: radial-gradient(circle, #c94060 0%, #d86080 50%, transparent 100%);
+  box-shadow: none;
+  z-index: 4;
+}
+.flower--4 .flower__white-circle::after,
+.flower--5 .flower__white-circle::after {
+  display: none;
+}
+
+/* Rose ambient glow - seamless soft radial fade */
+.flower--4 .flower__leafs::after {
+  background: radial-gradient(circle at 50% 50%, rgba(240, 130, 160, 0.22) 0%, rgba(230, 90, 130, 0.05) 45%, transparent 70%) !important;
+}
+.flower--5 .flower__leafs::after {
+  background: radial-gradient(circle at 50% 50%, rgba(190, 60, 90, 0.22) 0%, rgba(160, 40, 70, 0.05) 45%, transparent 70%) !important;
+}
+
+/* Rose light particles */
+.flower--4 .flower__light,
+.flower--5 .flower__light {
+  background-color: #ffccd5 !important;
+}
+.flower--4 .flower__light:nth-child(odd),
+.flower--5 .flower__light:nth-child(odd) {
+  background-color: #ffe0e8 !important;
+}
+
+/* ==========================================================================
+   CENTER 3D PIXEL HEART (Voxel Celestial Relic)
+   ========================================================================== */
+.pixel-heart-center-wrapper {
+  position: fixed;
+  top: 31%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 25;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Radiant Cosmic Pulsing Aura behind the Heart */
+.pixel-heart-aura {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  width: 300px;
+  height: 300px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 23, 94, 0.32) 0%,
+    rgba(255, 64, 129, 0.16) 38%,
+    rgba(180, 20, 80, 0.05) 65%,
+    transparent 75%
+  );
+  filter: blur(24px);
+  pointer-events: none;
+  animation: pixel-heart-aura-pulse 4s ease-in-out infinite;
+  z-index: -1;
+}
+
+@keyframes pixel-heart-aura-pulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(0.92);
+    opacity: 0.65;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.15);
+    opacity: 0.95;
+    filter: blur(30px);
+  }
+}
+
+/* 3D WebGL Canvas Box */
+.pixel-heart-canvas-box {
+  width: 300px;
+  height: 240px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  cursor: grab;
+  touch-action: none;
+  outline: none;
+}
+
+.pixel-heart-canvas-box:active {
+  cursor: grabbing;
+}
+
+.pixel-heart-canvas-box canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  outline: none;
+  pointer-events: auto;
+}
+
+/* Floating Cosmic Axis Mode Pill Button */
+.pixel-heart-control-badge {
+  margin-top: -4px;
+  pointer-events: auto;
+  animation: pixel-heart-fade-in 1.2s ease backwards;
+}
+
+.heart-mode-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(15, 8, 26, 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 105, 180, 0.28);
+  box-shadow: 
+    0 6px 20px rgba(0, 0, 0, 0.6),
+    0 0 14px rgba(255, 46, 99, 0.25),
+    inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 5px 14px;
+  color: #ffd6e7;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.6px;
+  cursor: pointer;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+}
+
+.heart-mode-btn:hover {
+  background: rgba(28, 12, 44, 0.88);
+  border-color: rgba(255, 105, 180, 0.58);
+  box-shadow: 
+    0 8px 25px rgba(0, 0, 0, 0.7),
+    0 0 22px rgba(255, 46, 99, 0.45),
+    inset 0 1px 2px rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+  color: #fff;
+}
+
+.heart-mode-btn:active {
+  transform: translateY(0) scale(0.97);
+}
+
+.heart-mode-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ff2a75;
+  box-shadow: 0 0 8px #ff2a75;
+  animation: mode-dot-pulse 2s infinite ease-in-out;
+}
+
+@keyframes mode-dot-pulse {
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.3); }
+}
+
+@keyframes pixel-heart-fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mobile & Tablet Responsive Viewports */
+@media screen and (max-width: 768px) {
+  .pixel-heart-center-wrapper {
+    top: 38%;
+  }
+
+  .pixel-heart-canvas-box {
+    width: 270px;
+    height: 250px;
+  }
+
+  .pixel-heart-aura {
+    width: 260px;
+    height: 260px;
+  }
+
+  .heart-mode-btn {
+    font-size: 0.70rem;
+    padding: 4px 12px;
+  }
+}
+
+@media screen and (max-height: 650px) {
+  .pixel-heart-center-wrapper {
+    top: 34%;
+  }
+
+  .pixel-heart-canvas-box {
+    width: 220px;
+    height: 200px;
+  }
+}
+
+/* ==========================================================================
+   CELESTIAL STAR PHOTO ORBS (Floating behind heart across deep space)
+   ========================================================================== */
+.cosmic-photo-stars-field {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 12; /* Behind the 3D heart (z-index: 25) */
+  overflow: hidden;
+}
+
+/* Base Star Orb Container */
+.star-photo-orb {
+  position: absolute;
+  border-radius: 50%;
+  cursor: pointer;
+  pointer-events: auto;
+  user-select: none;
+  -webkit-user-select: none;
+  will-change: transform;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: filter 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* Individual Star Orbs Initial Positions & Dimensions */
+.star-photo-orb--1 {
+  width: 110px;
+  height: 110px;
+  top: 24%;
+  left: 10%;
+  animation: star-celestial-drift-1 36s cubic-bezier(0.42, 0.05, 0.58, 0.95) infinite;
+}
+
+.star-photo-orb--2 {
+  width: 124px;
+  height: 124px;
+  top: 26%;
+  right: 11%;
+  animation: star-celestial-drift-2 44s cubic-bezier(0.42, 0.05, 0.58, 0.95) infinite;
+}
+
+.star-photo-orb--3 {
+  width: 104px;
+  height: 104px;
+  top: 36%;
+  left: 46%;
+  transform: translate(-50%, -50%);
+  animation: star-celestial-drift-3 40s cubic-bezier(0.42, 0.05, 0.58, 0.95) infinite;
+}
+
+/* Circular Star Ring Frame */
+.star-orb-ring {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  border: 2px solid rgba(255, 225, 238, 0.85);
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.65),
+    0 0 24px rgba(255, 46, 99, 0.45),
+    0 0 45px rgba(244, 166, 191, 0.2),
+    inset 0 0 14px rgba(255, 255, 255, 0.35);
+  background: #020108;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease, border-color 0.45s ease;
+}
+
+/* Photo Images with Precision Facial Alignment */
+.star-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: brightness(1.03) contrast(1.04) saturate(1.06);
+  transition: transform 0.5s ease;
+}
+
+.star-photo-img--1 {
+  object-position: 45% 35%;
+}
+
+.star-photo-img--2 {
+  object-position: 50% 35%;
+}
+
+.star-photo-img--3 {
+  object-position: 50% 32%;
+}
+
+/* Pulsing Cosmic Nebula Halo behind each Photo */
+.star-orb-halo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 160%;
+  height: 160%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(16px);
+  z-index: -1;
+  animation: star-orb-halo-pulse 4.5s ease-in-out infinite;
+}
+
+.star-photo-orb--1 .star-orb-halo {
+  background: radial-gradient(circle, rgba(255, 105, 180, 0.38) 0%, rgba(255, 46, 99, 0.14) 50%, transparent 75%);
+}
+
+.star-photo-orb--2 .star-orb-halo {
+  background: radial-gradient(circle, rgba(255, 215, 110, 0.35) 0%, rgba(255, 140, 170, 0.14) 50%, transparent 75%);
+  animation-delay: -1.5s;
+}
+
+.star-photo-orb--3 .star-orb-halo {
+  background: radial-gradient(circle, rgba(210, 140, 255, 0.38) 0%, rgba(255, 105, 180, 0.14) 50%, transparent 75%);
+  animation-delay: -3.0s;
+}
+
+@keyframes star-orb-halo-pulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(0.9);
+    opacity: 0.65;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 0.95;
+  }
+}
+
+/* Diamond Diffraction Flare Spikes */
+.star-orb-flare {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.star-orb-flare::before,
+.star-orb-flare::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #fff, 0 0 16px rgba(255, 215, 235, 0.9);
+}
+
+.star-orb-flare::before {
+  width: 2px;
+  height: 22px;
+}
+
+.star-orb-flare::after {
+  width: 22px;
+  height: 2px;
+}
+
+/* Little Floating Emoji Star Badge */
+.star-orb-badge {
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(20, 10, 36, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 200, 220, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6), 0 0 10px rgba(255, 105, 180, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.82rem;
+  z-index: 6;
+  animation: star-badge-float 3s ease-in-out infinite alternate;
+}
+
+@keyframes star-badge-float {
+  from { transform: translateY(0) scale(1); }
+  to { transform: translateY(-3px) scale(1.08); }
+}
+
+/* Hover Interaction: Pause & Magnify */
+.star-photo-orb:hover {
+  animation-play-state: paused !important;
+  z-index: 20;
+}
+
+.star-photo-orb:hover .star-orb-ring {
+  transform: scale(1.15);
+  border-color: #ffffff;
+  box-shadow: 
+    0 12px 35px rgba(0, 0, 0, 0.8),
+    0 0 32px rgba(255, 105, 180, 0.75),
+    0 0 60px rgba(255, 46, 99, 0.45),
+    inset 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+.star-photo-orb:hover .star-photo-img {
+  transform: scale(1.08);
+}
+
+/* ==========================================================================
+   CELESTIAL DRIFT KEYFRAME ANIMATIONS (Sweeping across deep space behind heart)
+   ========================================================================== */
+@keyframes star-celestial-drift-1 {
+  0% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+  25% {
+    transform: translate(12vw, 10vh) scale(1.05) rotate(4deg);
+  }
+  50% {
+    transform: translate(22vw, -5vh) scale(0.94) rotate(-3deg);
+  }
+  75% {
+    transform: translate(6vw, -8vh) scale(1.03) rotate(3deg);
+  }
+  100% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+}
+
+@keyframes star-celestial-drift-2 {
+  0% {
+    transform: translate(0, 0) scale(0.96) rotate(0deg);
+  }
+  25% {
+    transform: translate(-14vw, 12vh) scale(1.06) rotate(-5deg);
+  }
+  50% {
+    transform: translate(-24vw, -4vh) scale(0.95) rotate(4deg);
+  }
+  75% {
+    transform: translate(-8vw, -8vh) scale(1.03) rotate(-2deg);
+  }
+  100% {
+    transform: translate(0, 0) scale(0.96) rotate(0deg);
+  }
+}
+
+@keyframes star-celestial-drift-3 {
+  0% {
+    transform: translate(-50%, -50%) translate(0, 0) scale(1) rotate(0deg);
+  }
+  25% {
+    transform: translate(-50%, -50%) translate(-16vw, -12vh) scale(0.95) rotate(4deg);
+  }
+  50% {
+    transform: translate(-50%, -50%) translate(18vw, -10vh) scale(1.06) rotate(-5deg);
+  }
+  75% {
+    transform: translate(-50%, -50%) translate(12vw, 12vh) scale(0.96) rotate(3deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) translate(0, 0) scale(1) rotate(0deg);
+  }
+}
+
+/* ==========================================================================
+   COSMIC STAR PHOTO LIGHTBOX (Full screen dreamy memory modal)
+   ========================================================================== */
+.cosmic-photo-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+  pointer-events: none;
+}
+
+.cosmic-photo-modal.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.cosmic-photo-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(5, 2, 12, 0.82);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.cosmic-photo-card {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 420px;
+  width: 90%;
+  transform: scale(0.88) translateY(20px);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cosmic-photo-modal.active .cosmic-photo-card {
+  transform: scale(1) translateY(0);
+}
+
+.cosmic-photo-close {
+  align-self: flex-end;
+  background: rgba(25, 12, 40, 0.85);
+  border: 1px solid rgba(255, 182, 193, 0.35);
+  color: #ffd6e7;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 12px;
+  transition: all 0.25s ease;
+}
+
+.cosmic-photo-close:hover {
+  background: rgba(50, 20, 75, 0.95);
+  color: #fff;
+  transform: rotate(90deg) scale(1.1);
+}
+
+.cosmic-photo-frame {
+  width: 100%;
+  max-height: 62vh;
+  border-radius: 24px;
+  overflow: hidden;
+  position: relative;
+  border: 2px solid rgba(255, 215, 235, 0.5);
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.85),
+    0 0 35px rgba(255, 46, 99, 0.4),
+    0 0 60px rgba(244, 166, 191, 0.2);
+  background: #000;
+}
+
+.modal-photo-img {
+  width: 100%;
+  height: auto;
+  max-height: 62vh;
+  object-fit: contain;
+  display: block;
+}
+
+.cosmic-photo-caption {
+  margin-top: 16px;
+  padding: 10px 20px;
+  background: rgba(18, 8, 30, 0.75);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 182, 193, 0.25);
+  border-radius: 20px;
+  color: #ffe0eb;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-align: center;
+  letter-spacing: 0.4px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+/* Mobile & Tablet Responsive Tuning */
+@media screen and (max-width: 768px) {
+  .star-photo-orb--1 {
+    width: 90px;
+    height: 90px;
+    top: 14%;
+    left: 8%;
+  }
+
+  .star-photo-orb--2 {
+    width: 100px;
+    height: 100px;
+    top: 16%;
+    right: 8%;
+  }
+
+  .star-photo-orb--3 {
+    width: 86px;
+    height: 86px;
+    top: 52%;
+    left: 10%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .star-photo-orb--1 {
+    width: 76px;
+    height: 76px;
+  }
+
+  .star-photo-orb--2 {
+    width: 84px;
+    height: 84px;
+  }
+
+  .star-photo-orb--3 {
+    width: 74px;
+    height: 74px;
+  }
+}
+
 .container * {
   -webkit-animation-play-state: paused !important;
           animation-play-state: paused !important;
-}/*# sourceMappingURL=main.css.map */
+}
